@@ -2,6 +2,7 @@
 //Banking Transaction Simulator :Queue + basic binary tree
 
 //First we have to make basic bank code in java using Queue and basic binary tree --- Vannsh Shah
+//Second we will convert the binary tree to hash --- Manisha
 
 import java.util.*;
 
@@ -13,10 +14,14 @@ class Banking_App {
     // Using basic binary search tree for accounts (sorted by account number)
     private BST accounts;
     
+    // Using HaspMap to store
+    private HashMap<String, Account> accountMap;
+
     // Constructor
     public Banking_App() {
         transactionQueue = new LinkedList<>();
         accounts = new BST();
+        accountMap = new HashMap<>(); // Creating HashMap object
     }
     
     // Inner class for Account
@@ -147,6 +152,7 @@ class Banking_App {
     public void createAccount(String accountNumber, String name, double initialBalance) {
         Account acc = new Account(accountNumber, name, initialBalance);
         accounts.insert(acc);
+        accountMap.put(accountNumber, acc); // Storing every Account by HashMap for fast search
         System.out.println("Account created: " + acc);
     }
     
@@ -191,7 +197,7 @@ class Banking_App {
             System.out.println("Processing: " + t);
             
             if (t.type.equals("deposit")) {
-                Account acc = accounts.search(t.accountNumber);
+                Account acc = accountMap.get(t.accountNumber); // New add
                 if (acc != null) {
                     acc.balance += t.amount;
                     System.out.println("Deposited " + t.amount + " to " + t.accountNumber + ". New balance: " + acc.balance);
@@ -199,7 +205,7 @@ class Banking_App {
                     System.out.println("Account not found: " + t.accountNumber);
                 }
             } else if (t.type.equals("withdraw")) {
-                Account acc = accounts.search(t.accountNumber);
+                Account  acc = accountMap.get(t.accountNumber); // New add 
                 if (acc != null) {
                     if (acc.balance >= t.amount) {
                         acc.balance -= t.amount;
@@ -211,8 +217,8 @@ class Banking_App {
                     System.out.println("Account not found: " + t.accountNumber);
                 }
             } else if (t.type.equals("transfer")) {
-                Account from = accounts.search(t.accountNumber);
-                Account to = accounts.search(t.toAccount);
+                Account  from  = accountMap.get(t.accountNumber); // new add
+                Account to = accountMap.get(t.toAccount); // new add 
                 if (from != null && to != null) {
                     if (from.balance >= t.amount) {
                         from.balance -= t.amount;
@@ -233,8 +239,8 @@ class Banking_App {
     
     // Get account details
     public Account getAccount(String accountNumber) {
-        return accounts.search(accountNumber);
-    }
+    return accountMap.get(accountNumber); // UPDATED for Fast(HashMap)
+}
     
     // Get all accounts sorted by account number (inorder traversal of BST)
     public void displaySortedAccounts() {
@@ -246,3 +252,4 @@ class Banking_App {
         }
     }
 }
+
