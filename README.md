@@ -1,3 +1,4 @@
+```markdown
 # DS_Project_Banking
 Banking Transaction Simulator :Queue + hash + tree
 Team Member's Name:
@@ -8,6 +9,7 @@ Team Member's Name:
 
 Group Name: DS_Project_Banking
 Group number: 
+
 First we have to make basic bank code in java using Queue and tree --- Vannsh Shah
 
 Second we will convert the binary tree to hash --- Manisha
@@ -21,7 +23,8 @@ Everyone start their respectective work as the deadline is closing close everyda
 Manish:My work is done, Ayush you can start your work
 
 Ayush : Adding menu-driven user interface and improved output formatting
-```markdown
+
+
 The system simulates real-world banking tasks such as:
 - Managing customer accounts  
 - Processing transactions in order  
