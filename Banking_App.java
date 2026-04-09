@@ -30,13 +30,13 @@ class Banking_App {
         String accountNumber;
         String name;
         double balance;
-        List<String> history; 
+        List<String> history; // List to store History
 
         public Account(String accountNumber, String name, double balance) {
             this.accountNumber = accountNumber;
             this.name = name;
             this.balance = balance;
-            this.history = new ArrayList<>();
+            this.history = new ArrayList<>(); // Initialize history list when Account is created
         }
         
         @Override
@@ -203,7 +203,7 @@ class Banking_App {
                 Account acc = accountMap.get(t.accountNumber); // New add
                 if (acc != null) {
                     acc.balance += t.amount;
-                    acc.history.add("Deposite " + t.amount);
+                    acc.history.add("Deposited " + t.amount); // Add Deposite and amount in History List
                     System.out.println("Deposited " + t.amount + " to " + t.accountNumber + ". New balance: " + acc.balance);
                 } else {
                     System.out.println("Account not found: " + t.accountNumber);
@@ -213,7 +213,7 @@ class Banking_App {
                 if (acc != null) {
                     if (acc.balance >= t.amount) {
                         acc.balance -= t.amount;
-                        acc.history.add("Withdrew " + t.amount);
+                        acc.history.add("Withdrew " + t.amount); // Add Withdraw and amount in History List
                         System.out.println("Withdrew " + t.amount + " from " + t.accountNumber + ". New balance: " + acc.balance);
                     } else {
                         System.out.println("Insufficient balance in " + t.accountNumber);
@@ -228,8 +228,8 @@ class Banking_App {
                     if (from.balance >= t.amount) {
                         from.balance -= t.amount;
                         to.balance += t.amount;
-                        from.history.add("Transferred " + t.amount + " to " + t.toAccount);
-                        to.history.add("Received " + t.amount + " from " + t.accountNumber);
+                        from.history.add("Transferred " + t.amount + " to " + t.toAccount); // Add transfer amount in History List
+                        to.history.add("Received " + t.amount + " from " + t.accountNumber); // Add received amount in History List
                         System.out.println("Transferred " + t.amount + " from " + t.accountNumber + " to " + t.toAccount);
                         System.out.println("New balance " + t.accountNumber + ": " + from.balance);
                         System.out.println("New balance " + t.toAccount + ": " + to.balance);
@@ -261,7 +261,7 @@ class Banking_App {
         }
     }
 
-    // Transaction History
+    // Transaction History Function:
     public void showTransactionHistory(String accountNumber) {
         Account acc = accountMap.get(accountNumber);
 
@@ -281,12 +281,14 @@ class Banking_App {
     }
 
 
-//  creating a Demo Main method to test the output
+// Creating a demo Main to Test the output
+
     public static void main(String[] args) {
         Banking_App bank = new Banking_App();
 
         bank.createAccount("101", "Manish", 5000);
         bank.createAccount("102", "Vannsh", 3000);
+        bank.createAccount("103", "Ayush", 4000);
 
         bank.deposit("101", 2000);
         bank.withdraw("102", 1000);
