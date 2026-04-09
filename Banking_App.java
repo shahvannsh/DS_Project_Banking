@@ -68,15 +68,11 @@ class Banking_App {
             this.amount = amount;
             this.toAccount = toAccount;
         }
-        
         @Override
         public String toString() {
-            return "Transaction{" +
-                    "type='" + type + '\'' +
-                    ", accountNumber='" + accountNumber + '\'' +
-                    ", amount=" + amount +
-                    ", toAccount='" + toAccount + '\'' +
-                    '}';
+        return "Account No: " + accountNumber +
+           ", Name: " + name +
+           ", Balance: ₹" + balance;
         }
     }
     
@@ -281,26 +277,91 @@ class Banking_App {
     }
 
 
-// Creating a demo Main to Test the output
+// Creating Main 
 
     public static void main(String[] args) {
-        Banking_App bank = new Banking_App();
+    Scanner sc = new Scanner(System.in);
+    Banking_App bank = new Banking_App();
 
-        bank.createAccount("101", "Manish", 5000);
-        bank.createAccount("102", "Vannsh", 3000);
-        bank.createAccount("103", "Ayush", 4000);
+    while (true) {
+        System.out.println("\n===== BANKING SYSTEM =====");
+        System.out.println("1. Create Account");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.println("4. Transfer");
+        System.out.println("5. View Account Details");
+        System.out.println("6. View Transaction History");
+        System.out.println("7. Show All Accounts");
+        System.out.println("8. Process Transactions");
+        System.out.println("9. Exit");
+        System.out.print("Enter choice: ");
 
-        bank.deposit("101", 2000);
-        bank.withdraw("102", 1000);
-        bank.transfer("101", "102", 1500);
+        int choice = sc.nextInt();
 
-        bank.processTransactions();
+        switch (choice) {
+            case 1:
+                System.out.print("Enter Account Number: ");
+                String accNo = sc.next();
+                System.out.print("Enter Name: ");
+                String name = sc.next();
+                System.out.print("Enter Initial Balance: ");
+                double bal = sc.nextDouble();
+                bank.createAccount(accNo, name, bal);
+                break;
 
-        bank.displaySortedAccounts();
+            case 2:
+                System.out.print("Enter Account Number: ");
+                accNo = sc.next();
+                System.out.print("Enter Amount: ");
+                double dep = sc.nextDouble();
+                bank.deposit(accNo, dep);
+                break;
 
-        bank.showTransactionHistory("101");
-        bank.showTransactionHistory("102");
+            case 3:
+                System.out.print("Enter Account Number: ");
+                accNo = sc.next();
+                System.out.print("Enter Amount: ");
+                double wd = sc.nextDouble();
+                bank.withdraw(accNo, wd);
+                break;
 
+            case 4:
+                System.out.print("From Account: ");
+                String from = sc.next();
+                System.out.print("To Account: ");
+                String to = sc.next();
+                System.out.print("Amount: ");
+                double amt = sc.nextDouble();
+                bank.transfer(from, to, amt);
+                break;
+
+            case 5:
+                System.out.print("Enter Account Number: ");
+                accNo = sc.next();
+                System.out.println(bank.getAccount(accNo));
+                break;
+
+            case 6:
+                System.out.print("Enter Account Number: ");
+                accNo = sc.next();
+                bank.showTransactionHistory(accNo);
+                break;
+
+            case 7:
+                bank.displaySortedAccounts();
+                break;
+
+            case 8:
+                bank.processTransactions();
+                break;
+
+            case 9:
+                System.out.println("Exiting...");
+                return;
+
+            default:
+                System.out.println("Invalid choice!");
+        }
     }
 }
 
